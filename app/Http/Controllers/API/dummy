@@ -1,0 +1,39 @@
+public function cartList(Request $request)
+{
+    $userId = $request->input('user_id');
+    $sessionId = $request->input('session_id');
+    $baseImageUrl = 'assets/img/about';
+    $cartItems = null;
+
+    if ($userId) {
+        $cartItems = CartModel::where('user_id', $userId)->with(['product' => function ($query) {
+            $query->select('id', 'name', 'price', 'description', 'price', 'image as');
+        }])
+            ->select('id', 'user_id', 'product_id', 'quantity')
+            ->get();
+    } else {
+        $cartItems = CartModel::where('session_id', $sessionId)->with(['product' => function ($query) {
+            $query->select('id', 'name', 'price', 'description', 'price', 'image as product_image');
+        }])
+            ->select('id', 'user_id', 'session_id', 'product_id', 'quantity')
+            ->get();
+    }
+
+    $cartItems->transform(function ($cartItem) {
+        return [
+            'id' => $cartItem->id,
+            'user_id' => $cartItem->user_id,
+            'product_id' => $cartItem->product_id,
+            'quantity' => $cartItem->quantity,
+            'product' => [
+                'id' => $cartItem->product->id,
+                'name' => $cartItem->product->name,
+                'price' => $cartItem->product->price,
+                'description' => $cartItem->product->description,
+                'product_image' => $cartItem->product->image ? 'assets/img/about' . $cartItem->product->image : null,
+            ],
+        ];
+    });
+
+    return response()->json(['message' => 'Item added to cart successfully', 'baseImageUrl' => $baseImageUrl, 'cartItems' => $cartItems]);
+}
