@@ -35,9 +35,17 @@ Route::post('/auth/login', [AuthController::class, 'loginUser']);
 Route::apiResources(['products' => ProductDetailsController::class]);
 Route::get('/records', [CategoryController::class, 'index']);
 Route::get('/category/{id}', [CategoryController::class, 'categorys']);
+Route::get('/product_all/{id}', [ProductController::class, 'product_all']);
+
 
 Route::post('/addtocart', [CartController::class, 'addToCart']);
 Route::post('/cartlist', [CartController::class, 'cartList']);
+// Route::get('/product_all/{id}', [ProductController::class, 'product_all']);
+
+// Route::get('/product_all/{id}', [ProductDetailsController::class, 'product_all']);
+// Route::get('/api/product_all/{ID}', 'API\ProductDetailsController@product_all');
+
+
 Route::post('/updateCartItem/{itemId}', [CartController::class, 'updateCartItem']);
 Route::get('/deleteCartItem/{id}', [CartController::class, 'deleteCartItem']);
 

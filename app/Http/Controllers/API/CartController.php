@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ProductModel;
 use App\Models\CartModel;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Session\Middleware\StartSession;
@@ -130,4 +131,5 @@ class CartController extends Controller
         // $updatedCart = $this->getUpdatedCartData();
         return response()->json(['msg' => 'Item deleted successfully'], 404);
     }
+    
 }

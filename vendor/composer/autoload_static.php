@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit89f8d40b7197778d512a62e79804370b
+class ComposerStaticInit66294f463d97ced7a18e8eb281c0f976
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -412,8 +412,8 @@ class ComposerStaticInit89f8d40b7197778d512a62e79804370b
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -681,6 +681,11 @@ class ComposerStaticInit89f8d40b7197778d512a62e79804370b
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Mail\\ContactFormMail' => __DIR__ . '/../..' . '/app/Mail/ContactFormMail.php',
+        'App\\Mail\\ContactFormMail1' => __DIR__ . '/../..' . '/app/Mail/ContactFormMail1.php',
+        'App\\Mail\\ContactUsMail' => __DIR__ . '/../..' . '/app/Mail/ContactUsMail.php',
+        'App\\Mail\\MyApiMail' => __DIR__ . '/../..' . '/app/Mail/MyApiMail.php',
+        'App\\Mail\\contact' => __DIR__ . '/../..' . '/app/Mail/contact.php',
         'App\\Models\\BrandModel' => __DIR__ . '/../..' . '/app/Models/BrandModel.php',
         'App\\Models\\CartModel' => __DIR__ . '/../..' . '/app/Models/CartModel.php',
         'App\\Models\\CategoryModel' => __DIR__ . '/../..' . '/app/Models/CategoryModel.php',
@@ -7913,10 +7918,10 @@ class ComposerStaticInit89f8d40b7197778d512a62e79804370b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit89f8d40b7197778d512a62e79804370b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit89f8d40b7197778d512a62e79804370b::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit89f8d40b7197778d512a62e79804370b::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit89f8d40b7197778d512a62e79804370b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit66294f463d97ced7a18e8eb281c0f976::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit66294f463d97ced7a18e8eb281c0f976::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit66294f463d97ced7a18e8eb281c0f976::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit66294f463d97ced7a18e8eb281c0f976::$classMap;
 
         }, null, ClassLoader::class);
     }
