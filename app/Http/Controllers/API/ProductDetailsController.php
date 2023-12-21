@@ -81,7 +81,7 @@ class ProductDetailsController extends Controller
                     'updated_at' => $productDetails->updated_at,
                     'category' => $productDetails->category,
                     'brand' => $productDetails->brand,
-                    'size' => $colonWiseArray,
+                    'size' =>[$colonWiseArray],
                     'featured' => $productDetails->featured,
                     'image' => $productDetails->image ? url('/storage/app/public/images') . '/' . $productDetails->image : null,
                 ];
