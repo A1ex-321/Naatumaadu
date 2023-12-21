@@ -70,7 +70,10 @@ class ProductDetailsController extends Controller
                 $array = explode(", ", $size);
                 foreach ($array as $item) {
                     $colonSplit = explode(":", $item);
-                    $colonWiseArray[$colonSplit[0]] = $colonSplit[1];
+                        $colonWiseArray []= [
+                            'weight' => $colonSplit[0],
+                            'price' => $colonSplit[1]
+                        ];
                 }
                 $transformedProductDetails = [
                     'id' => $productDetails->id,
@@ -81,7 +84,7 @@ class ProductDetailsController extends Controller
                     'updated_at' => $productDetails->updated_at,
                     'category' => $productDetails->category,
                     'brand' => $productDetails->brand,
-                    'size' =>[$colonWiseArray],
+                    'size' => $colonWiseArray,
                     'featured' => $productDetails->featured,
                     'image' => $productDetails->image ? url('/storage/app/public/images') . '/' . $productDetails->image : null,
                 ];
