@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ProductModel;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
+
 
 class ProductDetailsController extends Controller
 {
@@ -16,9 +18,15 @@ class ProductDetailsController extends Controller
     {
         try {
             $products = ProductModel::all();
-    
-            // Transform each product to include the complete image URL
             $transformedProducts = $products->map(function ($product) {
+                $size = $product->size;
+                // Log::info('size API Request: ' . json_encode($size));
+                $array = explode(", ", $size);
+                $colonWiseArray = [];
+                foreach ($array as $item) {
+                    $colonSplit = explode(":", $item);
+                    $colonWiseArray[$colonSplit[0]] = $colonSplit[1];
+                }
                 return [
                     'id' => $product->id,
                     'name' => $product->name,
@@ -28,12 +36,12 @@ class ProductDetailsController extends Controller
                     'updated_at' => $product->updated_at,
                     'category_id' => $product->category_id,
                     'brand_id' => $product->brand_id,
-                    'size' => $product->size,
+                    'size' => $colonWiseArray,
                     'featured' => $product->featured,
                     'image' => $product->image ? url('/storage/app/public/images') . '/' . $product->image : null,
                 ];
             });
-    
+
             return response()->json($transformedProducts);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -55,9 +63,15 @@ class ProductDetailsController extends Controller
     {
         try {
             $productDetails = ProductModel::where('id', $id)->with('category', 'brand')->first();
-        
+
             if ($productDetails) {
-                // Transform the product details to include the complete image URL
+                $size = $productDetails->size;
+                // Log::info('size API Request: ' . json_encode($size));
+                $array = explode(", ", $size);
+                foreach ($array as $item) {
+                    $colonSplit = explode(":", $item);
+                    $colonWiseArray[$colonSplit[0]] = $colonSplit[1];
+                }
                 $transformedProductDetails = [
                     'id' => $productDetails->id,
                     'name' => $productDetails->name,
@@ -67,11 +81,11 @@ class ProductDetailsController extends Controller
                     'updated_at' => $productDetails->updated_at,
                     'category' => $productDetails->category,
                     'brand' => $productDetails->brand,
-                    'size' => $productDetails->size,
+                    'size' => $colonWiseArray,
                     'featured' => $productDetails->featured,
                     'image' => $productDetails->image ? url('/storage/app/public/images') . '/' . $productDetails->image : null,
                 ];
-        
+
                 return response()->json($transformedProductDetails, Response::HTTP_OK);
             } else {
                 return response()->json(['error' => 'Product not found'], Response::HTTP_NOT_FOUND);
