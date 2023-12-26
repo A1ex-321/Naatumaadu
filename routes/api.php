@@ -50,6 +50,8 @@ Route::get('/deleteCartItem/{id}', [CartController::class, 'deleteCartItem']);
 
 Route::post('/place-order', [PaymentController::class, 'placeOrder']);
 Route::post('/payment/store', [PaymentController::class, 'store']);
+Route::post('/orders', [PaymentController::class, 'Orders']);
+
 
 
 

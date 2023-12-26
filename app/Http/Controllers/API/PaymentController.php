@@ -119,4 +119,32 @@ class PaymentController extends Controller
             return response()->json(['error' => 'Error handling payment'], 500);
         }
     }
+    public function Orders(Request $request)
+    {
+        $userId = $request->input('user_id');
+        $sessionId = $request->input('session_id');
+        $existingCartItems = [];
+        try {
+            if ($userId) {
+                $cartItems = OrderModel::where('user_id', $userId)->get();
+                foreach ($cartItems as $order) {
+                    $array = $order->product_id;
+                    foreach ($array as $order1) {
+                        $array1 = explode(",", $order1);
+                        $existingCartItem = ProductModel::whereIn('id', $array1)->get();
+                        foreach ($existingCartItem as $item) {
+                            $item->order_status = $order->order_status;
+                            $existingCartItems[] = $item->toArray();
+
+                        }
+                    }
+                }
+            } else {
+                $cartItems = OrderModel::where('session_id', $sessionId)->get();
+            }
+            return response()->json(['message' => 'successfully', 'myorder' => $existingCartItems]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error list item'], 500);
+        }
+    }
 }
