@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+// namespace App\Http\Controllers;
 use App\Models\Backgroundimage;
 
 use App\Http\Controllers\Controller;
@@ -65,29 +65,19 @@ class BackgroundimageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Backgroundimage $gallery)
+    public function edit(Backgroundimage $backgroundgallery)
     {
-        return view('admin.backgroundimage.edit', compact('gallery'));
+        //  dd($gallery->id); 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Backgroundimage $gallery)
+    public function update(Request $request, Backgroundimage $backgroundgallery)
     {
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $gallery->image_path = $imageName;
-        }
-
-        // Update other fields as needed
-
-        $gallery->save();
-
-        return redirect()->route('backgroundgallery.index')->with('success', 'Gallery updated successfully!');
+      
     }
+    
 
     /**
      * Remove the specified resource from storage.

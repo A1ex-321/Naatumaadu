@@ -64,7 +64,7 @@
 
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-info">Add Gallery</button>
+                                    <button type="submit" class="btn btn-info">Add Image</button>
                                 </div>
                             </form>
                         </div>
@@ -83,7 +83,7 @@
         </div>
         <div class="container">
             @if (count($galleries) > 0)
-                <h6>Gallery List</h6>
+                <h6>Gallery List(*Only First image will be display on Dashboard and If exists please Delete others*)</h6>
 
                 <table class="table">
                     <thead>
@@ -100,9 +100,9 @@
 
 </td>
                                 <td style="display: flex">
-                                     <a href="{{ route('backgroundgallery.edit', $gallery->id) }}" class="btn btn-warning btn-sm mr-2">
+                                     <!-- <a href="{{ route('backgroundgallery.edit', $gallery->id) }}" class="btn btn-warning btn-sm mr-2">
                                         <i class="fas fa-edit fa-sm"></i>
-                                    </a> 
+                                    </a>  -->
                                     <form action="{{ route('backgroundgallery.destroy', $gallery->id) }}" method="post"
                                         onsubmit="return confirm('Are you sure you want to delete this gallery?')">
                                         @csrf

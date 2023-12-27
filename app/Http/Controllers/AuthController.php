@@ -25,7 +25,7 @@ class AuthController extends Controller
         // dd($request->all());
         $remember = !empty($request->remember)?true:false;
         if(Auth::attempt(['email'=> $request->email, 'password'=> $request->password, 'is_admin'=>1, 'status'=>0], $remember)){
-            return redirect('admin/dashboard');
+            return redirect('admin/products');
         }
         else{
             return redirect()->back()->with('error','Please enter correct email & password');

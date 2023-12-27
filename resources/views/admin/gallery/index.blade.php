@@ -103,7 +103,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Image</th>
                             <th>Actions</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -111,6 +113,8 @@
                             <tr>
                                 <td>{{ $gallery->id }}</td>
                                 <td>{{ $gallery->name }}</td>
+                                <td><img src="{{ asset('public/images/' . $gallery->image) }}" alt="" style="max-width: 100px; max-height: 70px;"></td>
+
                                 <td style="display: flex">
                                     {{-- <a href="{{ route('products.edit', $gallery->id) }}" class="btn btn-warning btn-sm mr-2">
                                         <i class="fas fa-edit fa-sm"></i>

@@ -53,6 +53,8 @@ Route::post('/place-order', [PaymentController::class, 'placeOrder']);
 Route::post('/payment/store', [PaymentController::class, 'store']);
 Route::post('/orders', [PaymentController::class, 'Orders']);
 Route::get('/image', [ImageController::class, 'getbackgroundimage']);
+Route::get('/gallery', [ImageController::class, 'getgallery']);
+
 
 
 
