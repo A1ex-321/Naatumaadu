@@ -11,6 +11,7 @@ use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\PageController;
 use App\Http\Controllers\Web\LoginController;
 use App\Http\Controllers\Web\RegisterController;
+use App\Http\Controllers\Admin\BackgroundimageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Web\ProductDetailsController;
@@ -63,6 +64,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/orders/{orderId}/invoice', [OrdersController::class, 'generateInvoice'])->name('orders.generateInvoice');
 
     Route::resource('admin/gallery', GalleryController::class);
+    Route::resource('admin/backgroundgallery', BackgroundimageController::class);
 
 });
 

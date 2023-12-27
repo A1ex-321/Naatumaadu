@@ -163,7 +163,16 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{route('backgroundgallery.index')}}"
+            class="nav-link {{ request()->segment(2) === 'backgroundgallery' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
 
+            <p>
+              Backgroung Image
+            </p>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

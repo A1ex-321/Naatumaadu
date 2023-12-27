@@ -7,6 +7,7 @@ use App\Http\Controllers\API\ProductDetailsController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\Api\PaymentController;
 
 
@@ -51,6 +52,8 @@ Route::get('/deleteCartItem/{id}', [CartController::class, 'deleteCartItem']);
 Route::post('/place-order', [PaymentController::class, 'placeOrder']);
 Route::post('/payment/store', [PaymentController::class, 'store']);
 Route::post('/orders', [PaymentController::class, 'Orders']);
+Route::get('/image', [ImageController::class, 'getbackgroundimage']);
+
 
 
 
