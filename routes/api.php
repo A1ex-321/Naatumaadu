@@ -8,7 +8,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\ImageController;
-use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\PaymentController;
 
 
 
