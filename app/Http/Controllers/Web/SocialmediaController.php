@@ -40,7 +40,7 @@ class SocialmediaController extends Controller
             'twitter' => $request->input('twitter'),   
             'google' => $request->input('google'),   
             'mail' => $request->input('mail'),   
-            'videolink' => $request->input('mail'),   
+            'videolink' => $request->input('videolink'),   
         ]);
 
         // Save the gallery entry
