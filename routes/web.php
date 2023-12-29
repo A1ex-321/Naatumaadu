@@ -19,6 +19,8 @@ use App\Http\Controllers\web\CartController;
 use App\Http\Controllers\web\CheckoutController;
 use App\Http\Controllers\web\OrderDetailsController;
 use App\Http\Controllers\web\HeroimageController;
+use App\Http\Controllers\web\SocialmediaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +69,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('admin/gallery', GalleryController::class);
     Route::resource('admin/backgroundgallery', BackgroundimageController::class);
     Route::resource('admin/herogallery', HeroimageController::class);
-    // Route::resource('admin/backgroundgallery', HeroimageController::class);
+    Route::resource('admin/socialmedia', SocialmediaController::class);
+
 
 });
 

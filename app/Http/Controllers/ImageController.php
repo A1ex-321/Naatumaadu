@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Backgroundimage;
 use App\Models\Gallery;
 use App\Models\Heroimage;
+use App\Models\Socialmedia;
 
 class ImageController extends Controller
 {
@@ -46,7 +47,16 @@ class ImageController extends Controller
             }
             return response()->json(['image' => $all]);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Error handling payment'], 500);
+            return response()->json(['error' => 'Error handling hero gallery'], 500);
+        }
+    }
+    public function socialmedia(Request $request)
+    {
+        try {
+            $all = Socialmedia::get()->first();
+            return response()->json(['socialmedia' => $all]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error handling media'], 500);
         }
     }
 }

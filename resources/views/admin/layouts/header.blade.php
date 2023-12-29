@@ -184,7 +184,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{route('herogallery.index')}}"
+          <a href="{{route('socialmedia.index')}}"
             class="nav-link {{ request()->segment(2) === '' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
 
