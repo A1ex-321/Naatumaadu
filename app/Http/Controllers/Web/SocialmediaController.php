@@ -60,18 +60,29 @@ class SocialmediaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function editmedia($id)
     {
-        //
+        $data['product'] = Socialmedia::find($id);
+        $data['header_title'] = "Edit media";
+        return view('admin.socialmedia.mediaedit', $data);    
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updatemedia($id, Request $request)
     {
-        //
-    }
+        $brand = Socialmedia::find($id);
+        $brand->facebook = $request->facebook;
+        $brand->instagram = $request->instagram;
+        $brand->google = $request->google;
+        $brand->mail = $request->mail;
+        $brand->twitter = $request->twitter;
+        $brand->videolink = $request->videolink;
+
+        $brand->save();
+
+        return redirect()->route('socialmedia.index')->with('success', 'gallery deleted successfully');    }
 
     /**
      * Remove the specified resource from storage.

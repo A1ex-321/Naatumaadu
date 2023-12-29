@@ -70,7 +70,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('admin/backgroundgallery', BackgroundimageController::class);
     Route::resource('admin/herogallery', HeroimageController::class);
     Route::resource('admin/socialmedia', SocialmediaController::class);
-
+    Route::get('admin/socialmedia/edit/{id}', [SocialmediaController::class, 'editmedia'])->name('edit-media');
+    Route::put('admin/socialmedia/edit/{id}', [SocialmediaController::class, 'updatemedia'])->name('update-media');
 
 });
 

@@ -134,7 +134,7 @@
                             <td>{{ $product->mail }}</td>
                             <td>{{ $product->videolink }}</td>
                             <td style="display: flex">
-                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm mr-2">
+                                <a href="{{ route('edit-media', $product->id) }}" class="btn btn-warning btn-sm mr-2">
                                     <i class="fas fa-edit fa-sm"></i>
                                 </a>
                                 <form action="{{ route('socialmedia.destroy', $product->id) }}" method="post"
