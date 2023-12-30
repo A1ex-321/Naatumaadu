@@ -38,7 +38,7 @@ class ProductDetailsController extends Controller
                     'brand_id' => $product->brand_id,
                     'size' => $colonWiseArray,
                     'featured' => $product->featured,
-                    'image' => $product->image ? url('/storage/app/public/images') . '/' . $product->image : null,
+                    'image' => $product->image ? url('/public/images') . '/' . $product->image : null,
                 ];
             });
 
@@ -86,7 +86,7 @@ class ProductDetailsController extends Controller
                     'brand' => $productDetails->brand,
                     'size' => $colonWiseArray,
                     'featured' => $productDetails->featured,
-                    'image' => $productDetails->image ? url('/storage/app/public/images') . '/' . $productDetails->image : null,
+                    'image' => $productDetails->image ? url('/public/images') . '/' . $productDetails->image : null,
                 ];
 
                 return response()->json($transformedProductDetails, Response::HTTP_OK);

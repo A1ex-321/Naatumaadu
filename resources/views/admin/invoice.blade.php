@@ -9,7 +9,7 @@
         body {
             font-family: 'DejaVu Sans', sans-serif;
             line-height: 1.6;
-            background-color: #fff;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
         }
@@ -26,12 +26,10 @@
         header {
             display: flex;
             justify-content: space-between;
-            /* Center items vertically */
-            background-color: #5B8C51;
+            background-color: #ffffff;
             color: #fff;
             text-align: center;
             padding: 15px 20px;
-            /* Increased padding for better visual appearance */
         }
 
         h1 {
@@ -42,7 +40,6 @@
             text-align: right;
         }
 
-
         h2,
         h3 {
             color: #333;
@@ -50,23 +47,26 @@
 
         p {
             color: #555;
+            margin: 5px 0;
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0 15px;
             margin-top: 20px;
         }
 
         th,
         td {
             border: 1px solid #ddd;
-            padding: 10px;
+            padding: 15px;
             text-align: left;
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #E2C094;
+            color: #fff;
         }
 
         .total {
@@ -75,6 +75,17 @@
             font-size: 1.2em;
             color: #333;
         }
+
+        .addresses {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .address {
+            flex-basis: 48%;
+        }
     </style>
 </head>
 
@@ -82,18 +93,33 @@
     <div class="invoice-container">
         <header>
             <div>
-                <img src="{{ asset('assets/img/logo/logo.png') }}" alt="logo">
+                <img style="width: 200px;" src="{{ asset('assets/img/logo/lgo.png') }}" alt="logo">
             </div>
             <div>
                 <h1>Invoice</h1>
             </div>
         </header>
+        <div class="addresses">
+            <div class="address">
+                <h3>Bill From:</h3>
+                <p>Naattu The Native Food company Private Limited 53</p>
+                <p>
+                    Nehru Colony
+                    Mahalingapuram Pollachi
+                   </p>
+                <p> Coimbatore Tamilnadu -642109</p>
+            </div>
+            <div class="address">
+                <h3>Bill To:</h3>
+                <p> {{ $order->billing_first_name }}</p>
+                <p>{{ $order->billing_address }}</p>
+                <p>{{ $order->billing_postcode }}</p>
+                <p>Phone : {{ $order->billing_phone }}</p>
+            </div>
+        </div>
         <div style="padding: 20px;">
             <p>Order ID: {{ $order->id }}</p>
             <p>Date: {{ $order->created_at->format('Y-m-d') }}</p>
-
-            <!-- Display other order details as needed -->
-
             <h2>Products</h2>
             <table>
                 <thead>
@@ -105,22 +131,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($products as $product)
+                    @foreach ($products as $key => $product)
                         <tr>
-                            <td>{{ $product->product->name }}</td>
-                            <!-- Assuming you have a quantity field in your order, adjust accordingly -->
-                            <td>{{ $product->quantity }}</td>
-                            <td>{{ $product->size }}</td>
-                            <td>&#x20B9;{{ $product->quantity * $product->size }}</td>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $qty[$key] }}</td>
+                            <td>&#x20B9;{{ $product->price }}</td>
+                            <td>&#x20B9;{{ $result[$key] }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-
-
             <div class="total">Total: &#x20B9;
-                {{ $totalSum }}</div>
-
+                {{ number_format($order->subtotal, 2, '.', ',') }}
+            </div>
         </div>
     </div>
 </body>

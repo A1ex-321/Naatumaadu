@@ -7,6 +7,7 @@ use App\Models\ProductModel;
 use App\Http\Controllers\Controller;
 use App\Models\BrandModel;
 use App\Models\CategoryModel;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -35,11 +36,13 @@ class ProductController extends Controller
             // Handle image upload
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $imageName = Str::random(20) . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('public/images', $imageName); // The file will be stored in storage/app/public/images
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $imageName);
             } else {
                 $imageName = null; // No image uploaded
             }
+
+            // dd($d);
 
             // Save the product with other data (including the image path if needed)
             $productData = [
@@ -97,7 +100,34 @@ class ProductController extends Controller
         //     // Add other validation rules as needed
         // ]);
 
-        $product->update($request->all());
+        if ($request->hasFile('image')) {
+            // Handle the new image upload
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+
+            // Delete the old image if it exists
+            if ($product->image) {
+                Storage::disk('public')->delete('products/' . $product->image);
+            }
+
+            // Update the product with the new image name
+            $product->update([
+                'image' => $imageName,
+            ]);
+        }
+
+        // Update the product with other data
+        $product->update([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+            'category_id' => $request->input('category_id'),
+            'brand_id' => $request->input('brand_id'),
+            'feature' => $request->input('feature'),
+            'size' => $request->input('sizes'),
+        ]);
+        // $product->update($request->all());
 
         return redirect()->route('products.index')->with('success', 'Product updated successfully');
     }

@@ -62,29 +62,39 @@ class OrdersController extends Controller
         return Redirect::back()->with('success', 'Order deleted successfully.');
     }
 
-    public function generateInvoice($orderId)
+     public function generateInvoice($orderId)
     {
         $order = OrderModel::findOrFail($orderId);
-
         // $productIds = $order->product_id;
         // $products = ProductModel::whereIn('id', $productIds)->get();
-
         if (empty($order->user_id)) {
-            $cartItems = CartModel::where('session_id', $order->session_id)->with('product')->get();
+            $cartItems = OrderModel::where('session_id', $order->session_id)->get();
+            foreach ($cartItems as $cartItem) {
+                $quantityArray = explode(',', $cartItem->quantity);
+                $productIds = $cartItem->product_id; // Assuming product_id is an array
+                $products = ProductModel::whereIn('id', $productIds)->get();
+                foreach ($products as $product) {
+                    $productPrices[] = $product->price; // Append each price to the
+                }
+                $results = array_map(function ($quantity, $price) {
+                    return $quantity * $price;
+                }, $quantityArray, $productPrices);
+            }
         } else {
-            $cartItems = CartModel::where('user_id', $order->user_id)->with('product')->get();
+            $cartItems = OrderModel::where('user_id', $order->user_id)->get();
+            foreach ($cartItems as $cartItem) {
+                $quantityArray = explode(',', $cartItem->quantity);
+                $productIds = $cartItem->product_id;
+                $products = ProductModel::whereIn('id', $productIds)->get();
+                foreach ($products as $product) {
+                    $productPrices[] = $product->price;
+                }
+                $results = array_map(function ($quantity, $price) {
+                    return $quantity * $price;
+                }, $quantityArray, $productPrices);
+            }
         }
-
-        $totalSum = $cartItems->sum(function ($item) {
-            return $item->quantity * $item->size;
-        });
-
-        Log::info('data : ' . json_encode($totalSum ));
-
-
-        $pdf = PDF::loadView('admin.invoice', ['order' => $order, 'products' => $cartItems, 'totalSum' => $totalSum]);
-
-
+        $pdf = PDF::loadView('admin.invoice', ['order' => $order, 'products' => $products, 'totalSum' => $order->subtotal, 'result' => $results, 'qty' => $quantityArray]);
         return $pdf->download('invoice.pdf');
     }
 }

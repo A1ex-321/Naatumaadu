@@ -114,7 +114,7 @@
                                         <label for="image">Product Image</label>
                                         <input type="file" name="image" class="form-control-file" id="image">
                                         @if ($product->image)
-                                            <img src="{{ url('public/storage/images/' . $product->image) }}" width="150"
+                                            <img src="{{ asset('public/images/' . $product->image) }}" width="150"
                                                 height="100" alt="Product Image">
                                         @endif
                                     </div>
