@@ -5,12 +5,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ProductDetailsController;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PaymentController;
-
-
+use App\Http\Controllers\API\MessageController;
 
 use Laravel\Sanctum\Sanctum;
 
@@ -56,6 +55,7 @@ Route::get('/image', [ImageController::class, 'getbackgroundimage']);
 Route::get('/gallery', [ImageController::class, 'getgallery']);
 Route::get('/herogallery', [ImageController::class, 'getherogallery']);
 Route::get('/socialmedia', [ImageController::class, 'socialmedia']);
+Route::post('/message', [MessageController::class, 'store']);
 
 
 

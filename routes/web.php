@@ -15,12 +15,12 @@ use App\Http\Controllers\Admin\BackgroundimageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Web\ProductDetailsController;
-use App\Http\Controllers\web\CartController;
-use App\Http\Controllers\web\CheckoutController;
-use App\Http\Controllers\web\OrderDetailsController;
-use App\Http\Controllers\web\HeroimageController;
-use App\Http\Controllers\web\SocialmediaController;
-
+use App\Http\Controllers\Web\CartController;
+use App\Http\Controllers\Web\CheckoutController;
+use App\Http\Controllers\Web\OrderDetailsController;
+use App\Http\Controllers\Web\HeroimageController;
+use App\Http\Controllers\Web\SocialmediaController;
+use App\Http\Controllers\Admin\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +73,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/socialmedia/edit/{id}', [SocialmediaController::class, 'editmedia'])->name('edit-media');
     Route::put('admin/socialmedia/edit/{id}', [SocialmediaController::class, 'updatemedia'])->name('update-media');
 
+    Route::resource('admin/messages', MessageController::class);
 });
 
 
