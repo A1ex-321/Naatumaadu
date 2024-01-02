@@ -33,11 +33,11 @@
                             <td>{{ $message->email }}</td>
                             <td>{{ $message->message }}</td>
                             <td>
-                                {{-- <form action="{{ route('messages.destroy', $message->id) }}" method="POST"> --}}
+                                 <form action="{{ route('messages.destroy', $message->id) }}" method="POST"> 
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>
-                                {{-- </form>s --}}
+                                 </form>
                             </td>
                         </tr>
                     @endforeach
