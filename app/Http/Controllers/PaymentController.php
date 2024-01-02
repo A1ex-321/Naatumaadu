@@ -45,7 +45,7 @@ class PaymentController extends Controller
                 'key' => $api_key,
                 'amount' => $order->amount,
                 'order_id' => $order->id,
-                'name' => 'Organis',
+                'name' => 'NaattuMaadu',
                 'description' => 'Order Payment',
                 // 'image' => 'path_to_your_logo',
                 'prefill' => [

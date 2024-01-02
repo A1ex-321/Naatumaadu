@@ -67,8 +67,7 @@
                                                 <td>{{ $order->billing_first_name }} {{ $order->billing_last_name }}</td>
                                                 <td>{{ $order->billing_email }}</td>
                                                 <td>{{ $order->billing_phone }}</td>
-                                                <td>{{ $order->billing_address }}, {{ $order->billing_city }},
-                                                    {{ $order->billing_state }}, {{ $order->billing_postcode }}</td>
+                                                <td>{{ $order->billing_address }},{{ $order->billing_postcode }}</td>
                                                 <td>
                                                     <form method="POST"
                                                         action="{{ route('orders.updateStatus', $order->id) }}"
