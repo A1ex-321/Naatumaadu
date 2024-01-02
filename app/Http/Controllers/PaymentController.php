@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Session;
 use Razorpay\Api\Api;
 use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Addcartmail;
 
 class PaymentController extends Controller
 {
@@ -84,7 +86,15 @@ class PaymentController extends Controller
                 'quantity' => $request->input('quantity'),
             ];
             // Log::error('store : ' . json_encode($input));
+            if (!empty($order->id)) {
+                $firstname=$request->input('first_name');
+                $lastname=$request->input('last_name');
 
+            Mail::to($request->input('email'))->send(new Addcartmail($firstname,$lastname));
+             Log::error('store : ' . json_encode($order->id));
+             Log::error('store : ' . json_encode($request->input('email')));
+
+            }
             OrderModel::create($orderData);
             // Log::info('API Request: ' . json_encode($request->all()));
             // Log::info('API Response: ' . json_encode($order->json()));
@@ -119,6 +129,7 @@ class PaymentController extends Controller
             return response()->json(['error' => 'Error handling payment'], 500);
         }
     }
+  
     public function Orders(Request $request)
     {
         $userId = $request->input('user_id');
@@ -132,7 +143,10 @@ class PaymentController extends Controller
                     foreach ($array as $order1) {
                         $array1 = explode(",", $order1);
                         $existingCartItem = ProductModel::whereIn('id', $array1)->get();
+
                         foreach ($existingCartItem as $item) {
+            //  Log::info('mail : ' . json_encode($order->order_status));
+
                             $item->order_status = $order->order_status;
                             $existingCartItems[] = $item->toArray();
 

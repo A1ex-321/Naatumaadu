@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Statusupdatemail;
 class OrdersController extends Controller
 {
 
@@ -32,7 +33,10 @@ class OrdersController extends Controller
     public function updateStatus(Request $request, $orderId)
     {
         $order = OrderModel::findOrFail($orderId);
-
+        $email=$request->input('order_status');
+        $firstname=$order->billing_first_name;
+        $lastname=$order->billing_last_name;
+         Mail::to($order->billing_email)->send(new Statusupdatemail($firstname,$lastname,$email));
 
         $order->update(['order_status' => $request->input('order_status')]);
 

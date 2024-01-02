@@ -56,6 +56,8 @@ Route::get('/gallery', [ImageController::class, 'getgallery']);
 Route::get('/herogallery', [ImageController::class, 'getherogallery']);
 Route::get('/socialmedia', [ImageController::class, 'socialmedia']);
 Route::post('/message', [MessageController::class, 'store']);
+Route::post('/mail', [PaymentController::class, 'mailtoclient']);
+
 
 
 
